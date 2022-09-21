@@ -7,11 +7,11 @@ import {MdLocalMovies} from 'react-icons/md';
 function Layout() {
     return(
         <div className="w-full h-screen grid grid-cols-6 bg-slate-900">
-            <nav className="sm:w-1/3 w-full ml-auto mr-auto flex flex-col items-center bg-slate-800 sm:mt-16 sm:mb-16 sm:rounded-xl">
-                <div className="sm:text-4xl text-5xl text-red-800 mt-6">
+            <nav className="sm:w-1/3 w-full ml-auto mr-auto flex flex-col items-center bg-slate-800 sm:mt-8 sm:mb-8 sm:rounded-xl">
+                <div className="text-4xl text-red-800 mt-6">
                     <RiClapperboardFill />
                 </div>
-                <ul className="space-y-16 sm:text-2xl text-3xl sm:mt-16 mt-28 text-slate-500">
+                <ul className="space-y-16 text-2xl sm:mt-16 mt-28 text-slate-500">
                     <li>
                         <Link className="hover:text-white" to="/">
                             <FaMicrosoft />
