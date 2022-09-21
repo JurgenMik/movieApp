@@ -6,8 +6,8 @@ import {MdLocalMovies} from 'react-icons/md';
 
 function Layout() {
     return(
-        <div className="w-full h-screen grid grid-cols-6 bg-slate-900">
-            <nav className="sm:w-1/3 w-full ml-auto mr-auto flex flex-col items-center bg-slate-800 sm:mt-8 sm:mb-8 sm:rounded-xl">
+        <div className="w-full min-h-screen grid grid-cols-8 bg-slate-900">
+            <nav className="sm:w-1/3 w-full max-h-screen ml-auto mr-auto flex flex-col items-center bg-slate-800 sm:mt-6 sm:mb-6 sm:rounded-xl">
                 <div className="text-4xl text-red-800 mt-6">
                     <RiClapperboardFill />
                 </div>
