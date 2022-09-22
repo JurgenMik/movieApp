@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useMemo} from 'react';
 import { FaSearch, FaTv, FaBookmark, FaRegBookmark } from 'react-icons/fa';
 import {MdLocalMovies} from 'react-icons/md';
 import data from '../data.json';
@@ -11,10 +11,12 @@ function Home() {
         rating: string,
         isBookmarked: boolean,
         isTrending: boolean,
+        title: string,
     }
 
     const [trending, setTrending] = React.useState<movieInt[]>([]);
     const [recommended, setRecommended] = React.useState<movieInt[]>([]);
+    const [search, setSearch] = React.useState<string>('');
 
     useEffect(() => {
        getTrendingMovies();
@@ -37,6 +39,15 @@ function Home() {
         return data.isTrending;
     }
 
+    const getSearchResult = () => {
+        if (search) {
+            return data.filter(data => data.title.includes(search));
+        }
+        return recommended;
+    }
+
+    let searched = useMemo(getSearchResult, [recommended, search]);
+
     return(
         <div className="col-span-7 sm:ml-0 ml-6 mt-10">
             <div className="sm:w-1/2 w-full flex justify-center items-center text-white">
@@ -44,6 +55,7 @@ function Home() {
                 <input
                     className="w-full p-4 bg-slate-900 sm:text-2xl text-md"
                     placeholder="Search for movies or TV series"
+                    onChange={e => setSearch(e.target.value)}
                 />
             </div>
             <div className="w-full mt-6">
@@ -52,7 +64,7 @@ function Home() {
                     {trending.map((info : any, index) => {
                         return(
                             <div className="w-72 flex-shrink-0 relative" key={index}>
-                                <img className="rounded-lg" src={info.thumbnail.trending.small} alt="thumbnail" />
+                                <img className="rounded-lg" src={info.thumbnail.regular.large} alt="thumbnail" />
                                 <div className="flex flex-row absolute top-28 text-sm text-slate-400 space-x-2 ml-4">
                                     {info.isBookmarked ? <FaBookmark className="absolute left-56 bottom-24 text-white text-lg" /> :
                                         <FaRegBookmark className="absolute bottom-24 left-56 text-white text-lg" />}
@@ -77,7 +89,7 @@ function Home() {
                 <div className="w-full mt-10">
                     <h1 className="text-white sm:text-3xl text-xl">Recommended for you</h1>
                     <div className="w-full grid sm:grid-cols-4 grid-cols-2">
-                        {recommended.map((info : any, index) => {
+                        {searched.map((info : any, index) => {
                             return(
                                 <div className="w-full mt-10 relative" key={index}>
                                     <img className="rounded-lg sm:w-4/5 w-4/5 sm:h-40 h-24" src={info.thumbnail.regular.small} alt="recommended"/>
