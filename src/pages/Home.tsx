@@ -87,7 +87,8 @@ function Home() {
                     })}
                 </div>
                 <div className="w-full mt-10">
-                    <h1 className="text-white sm:text-3xl text-xl">Recommended for you</h1>
+                    {!search ? <h1 className="text-white sm:text-3xl text-xl">Recommended for you</h1> :
+                        <h1 className="text-white sm:text-3xl text-xl">Found {searched.length} Results for '{search}'</h1>}
                     <div className="w-full grid sm:grid-cols-4 grid-cols-2">
                         {searched.map((info : any, index) => {
                             return(
