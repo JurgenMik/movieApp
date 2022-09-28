@@ -1,9 +1,13 @@
-import React, { useEffect, useMemo } from 'react';
+import React, {useEffect, useMemo, useContext} from 'react';
 import { FaSearch, FaTv, FaBookmark, FaRegBookmark } from 'react-icons/fa';
 import {MdLocalMovies} from 'react-icons/md';
 import data from '../data.json';
+import {MovieContext} from "../Contexts/MovieContext";
 
 function Home() {
+
+    // @ts-ignore
+    const { recommended, setRecommended, trending, setTrending, search, setSearch } = useContext(MovieContext);
 
     interface movieInt {
         year: number,
@@ -13,10 +17,6 @@ function Home() {
         isTrending: boolean,
         title: string,
     }
-
-    const [trending, setTrending] = React.useState<movieInt[]>([]);
-    const [recommended, setRecommended] = React.useState<movieInt[]>([]);
-    const [search, setSearch] = React.useState<string>('');
 
     useEffect(() => {
        getTrendingMovies();
@@ -69,7 +69,7 @@ function Home() {
             <div className="w-full mt-6">
                 <h1 className="sm:text-3xl text-2xl text-white">Trending</h1>
                 <div className="w-full flex flex-row space-x-10 mt-6">
-                    {trending.map((info : any, index) => {
+                    {trending.map((info : any, index : number) => {
                         return(
                             <div className="w-72 flex-shrink-0 relative" key={index}>
                                 <img className="rounded-lg" src={info.thumbnail.regular.large} alt="thumbnail" />
@@ -98,7 +98,7 @@ function Home() {
                     {!search ? <h1 className="text-white sm:text-3xl text-2xl">Recommended for you</h1> :
                         <h1 className="text-white sm:text-3xl text-xl">Found {searched.length} Results for '{search}'</h1>}
                     <div className="w-full grid sm:grid-cols-4 grid-cols-2">
-                        {searched.map((info : any, index) => {
+                        {searched.map((info : any, index : number) => {
                             return(
                                 <div className="w-full mt-10 relative" key={index}>
                                     <img className="rounded-lg sm:w-4/5 w-4/5 sm:h-40 h-24" src={info.thumbnail.regular.small} alt="recommended"/>

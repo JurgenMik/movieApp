@@ -1,9 +1,13 @@
-import React, {useEffect} from 'react';
+import React, { useEffect, useContext } from 'react';
 import data from "../data.json";
 import {FaBookmark, FaRegBookmark, FaTv} from "react-icons/fa";
 import {MdLocalMovies} from "react-icons/md";
+import {MovieContext} from "../Contexts/MovieContext";
 
 function Bookmark() {
+
+    // @ts-ignore
+    const { recommended } = useContext(MovieContext)
 
     interface movieInt {
         year: number,
@@ -15,12 +19,14 @@ function Bookmark() {
 
     const [bookmarked, setBookmarked] = React.useState<movieInt[]>([]);
 
+    console.log(recommended)
+
     useEffect(()=> {
         getBookmarked();
     }, [])
 
     const getBookmarked = () => {
-        setBookmarked(bookmarked.concat(data.filter(data => data.isBookmarked)));
+        setBookmarked(bookmarked.concat(recommended.filter((data : any) => data.isBookmarked)));
     }
 
     return(
