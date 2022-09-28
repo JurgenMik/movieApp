@@ -19,9 +19,7 @@ function Bookmark() {
 
     const [bookmarked, setBookmarked] = React.useState<movieInt[]>([]);
 
-    console.log(recommended)
-
-    useEffect(()=> {
+    useEffect(() => {
         getBookmarked();
     }, [])
 

@@ -18,12 +18,10 @@ function App() {
         title: string,
     }
 
-    const [trending, setTrending] = React.useState<movieInt[]>([]);
     const [recommended, setRecommended] = React.useState<movieInt[]>([]);
-    const [search, setSearch] = React.useState<string>('');
 
   return (
-      <MovieContext.Provider value={{trending, setTrending, recommended, setRecommended, search, setSearch}}>
+      <MovieContext.Provider value={{ recommended, setRecommended }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />} >

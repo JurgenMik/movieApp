@@ -7,7 +7,7 @@ import {MovieContext} from "../Contexts/MovieContext";
 function Home() {
 
     // @ts-ignore
-    const { recommended, setRecommended, trending, setTrending, search, setSearch } = useContext(MovieContext);
+    const { recommended, setRecommended } = useContext(MovieContext);
 
     interface movieInt {
         year: number,
@@ -17,6 +17,9 @@ function Home() {
         isTrending: boolean,
         title: string,
     }
+
+    const [trending, setTrending] = React.useState<movieInt[]>([]);
+    const [search, setSearch] = React.useState<string>('');
 
     useEffect(() => {
        getTrendingMovies();
